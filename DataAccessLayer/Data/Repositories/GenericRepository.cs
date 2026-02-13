@@ -9,12 +9,12 @@ namespace DataAccessLayer.Data.Repositories
 
         public IQueryable<T> GetAll()
         {
-            return _context.Set<T>().AsQueryable();
+            return _context.Set<T>().AsQueryable().AsNoTracking();
         }
 
         public async Task<T?> GetByIdAsync(Guid id)
         {
-            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task AddAsync(T entity)

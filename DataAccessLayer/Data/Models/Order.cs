@@ -7,9 +7,9 @@ namespace DataAccessLayer.Data.Models
         public Decimal TotalAmount { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
         public Status Status { get; set; }
-        public int CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
         public Customer Customer { get; set; } = null!;
-        public DateTime OrderDate { get; set; } = DateTime.Now;
+        public DateTime OrderDate { get; set; }
         public Invoice Invoice { get; set; } = null!;
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }

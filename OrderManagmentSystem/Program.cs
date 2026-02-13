@@ -1,5 +1,10 @@
 
+using ApplicationLayer.Interfaces;
+using ApplicationLayer.Mapping;
+using ApplicationLayer.Services;
 using DataAccessLayer.Data;
+using DataAccessLayer.Data.Contracts;
+using DataAccessLayer.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using PresentationLayer.Middlewares;
 
@@ -22,8 +27,10 @@ namespace OrderManagmentSystem
                 option.UseSqlServer(builder.Configuration.GetConnectionString("CS"));
             });
             builder.Services.AddScoped<TransactionMiddleware>();
-
-
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddTransient<IEmailService, SmtpEmailService>();
+            builder.Services.AddAutoMapper(typeof(OrderProfileDto).Assembly);
+            builder.Services.AddScoped(typeof(IOrderService), typeof(OrderService));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
