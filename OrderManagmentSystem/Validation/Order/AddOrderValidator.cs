@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Dtos.Orders;
 using FluentValidation;
 
-namespace PresentationLayer.Validation
+namespace PresentationLayer.Validation.Order
 {
     public class AddOrderValidator : AbstractValidator<AddOrderDto>
     {
