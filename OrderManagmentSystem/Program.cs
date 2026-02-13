@@ -1,6 +1,7 @@
 
 using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
+using PresentationLayer.Middlewares;
 
 namespace OrderManagmentSystem
 {
@@ -20,6 +21,8 @@ namespace OrderManagmentSystem
             {
                 option.UseSqlServer(builder.Configuration.GetConnectionString("CS"));
             });
+            builder.Services.AddScoped<TransactionMiddleware>();
+
 
             var app = builder.Build();
 
@@ -31,7 +34,7 @@ namespace OrderManagmentSystem
             }
 
             app.UseHttpsRedirection();
-
+            app.UseMiddleware<TransactionMiddleware>();
             app.UseAuthorization();
 
 
