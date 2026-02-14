@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Data.Models.Enums;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Data.Models
 {
-    public class User : BaseEntity
+    public class User : IdentityUser
     {
-        public string Username { get; set; } = null!;
-        public string PasswordHash { get; set; } = null!;
         public UserRole Role { get; set; } = UserRole.Customer;
-
-        public int? CustomerId { get; set; }
-        public Customer? Customer { get; set; }
+        public string RoleName => Role.ToString();
     }
 
 }

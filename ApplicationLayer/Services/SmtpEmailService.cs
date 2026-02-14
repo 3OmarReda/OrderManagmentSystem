@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace ApplicationLayer.Services
-{
     using ApplicationLayer.Interfaces;
     using Microsoft.Extensions.Configuration;
     using System.Net;
     using System.Net.Mail;
 
+namespace ApplicationLayer.Services
+
+{
     public class SmtpEmailService : IEmailService
     {
         private readonly IConfiguration _config;
