@@ -18,29 +18,29 @@ namespace ApplicationLayer.Services
 {
     public class OrderService(IEmailService _emailService, IGenericRepository<Product> _productRepository, IGenericRepository<Order> _orderRepository, IMapper _mapper, IGenericRepository<Customer> _customerRepository) : IOrderService
     {
-        public async Task<ResultT<PagedResult<GetOrderResponceDto>>> GetAllOrders(GetAllOrdersWithPaginationDto dto)
+        public async Task<ResultT<PagedResult<GetOrderResponseDto>>> GetAllOrders(GetAllOrdersWithPaginationDto dto)
         {
             var query = _orderRepository.GetAll();
             var totalCount = await query.CountAsync();
-            var data = query.ProjectTo<GetOrderResponceDto>(_mapper.ConfigurationProvider);
+            var data = query.ProjectTo<GetOrderResponseDto>(_mapper.ConfigurationProvider);
             var items = await data.Skip((dto.PageNumber - 1) * dto.PageSize).Take(dto.PageSize).ToListAsync();
-            var pagedResult = new PagedResult<GetOrderResponceDto>
+            var pagedResult = new PagedResult<GetOrderResponseDto>
             {
                 Items = items,
                 PageNumber = dto.PageNumber,
                 PageSize = dto.PageSize,
                 TotalCount = totalCount
             };
-            return ResultT<PagedResult<GetOrderResponceDto>>.Success(pagedResult);
+            return ResultT<PagedResult<GetOrderResponseDto>>.Success(pagedResult);
         }
 
-        public async Task<ResultT<GetOrderResponceDto>> GetOrderByIdAsync(Guid id)
+        public async Task<ResultT<GetOrderResponseDto>> GetOrderByIdAsync(Guid id)
         {
             var order = await _orderRepository.GetByIdAsync(id);
             if (order is null)
-                return ResultT<GetOrderResponceDto>.Failure(new Error(ErrorCode.NotFound, "Order Not Found !!"));
-            var data = _mapper.Map<GetOrderResponceDto>(order);
-            return ResultT<GetOrderResponceDto>.Success(data);
+                return ResultT<GetOrderResponseDto>.Failure(new Error(ErrorCode.NotFound, "Order Not Found !!"));
+            var data = _mapper.Map<GetOrderResponseDto>(order);
+            return ResultT<GetOrderResponseDto>.Success(data);
         }
         public async Task<Result> AddOrderAsync(AddOrderDto dto)
         {

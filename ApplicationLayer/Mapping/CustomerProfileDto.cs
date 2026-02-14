@@ -1,4 +1,4 @@
-﻿using ApplicationLayer.Dtos.Orders;
+﻿using ApplicationLayer.Dtos.Customers;
 using AutoMapper;
 using DataAccessLayer.Data.Models;
 using System;
@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.Mapping
 {
-    public class OrderProfileDto : Profile
+    public class CustomerProfileDto : Profile
     {
-        public OrderProfileDto()
+        public CustomerProfileDto()
         {
-            CreateMap<Order, GetOrderResponseDto>();
+            CreateMap<AddCustomerDto, Customer>();
+
         }
     }
 }

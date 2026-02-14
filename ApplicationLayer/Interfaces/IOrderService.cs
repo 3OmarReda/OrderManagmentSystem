@@ -11,8 +11,8 @@ namespace ApplicationLayer.Interfaces
 {
     public interface IOrderService
     {
-        Task<ResultT<PagedResult<GetOrderResponceDto>>> GetAllOrders(GetAllOrdersWithPaginationDto dto);
-        Task<ResultT<GetOrderResponceDto>> GetOrderByIdAsync(Guid id);
+        Task<ResultT<PagedResult<GetOrderResponseDto>>> GetAllOrders(GetAllOrdersWithPaginationDto dto);
+        Task<ResultT<GetOrderResponseDto>> GetOrderByIdAsync(Guid id);
         Task<Result> AddOrderAsync(AddOrderDto dto);
         Task<Result> UpdateOrderStatus(Guid orderId, UpdateOrderStatusDto dto);
     }

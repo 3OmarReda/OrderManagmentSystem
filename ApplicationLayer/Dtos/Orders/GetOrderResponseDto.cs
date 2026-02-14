@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.Dtos.Orders
 {
-    public class GetOrderResponceDto
+    public class GetOrderResponseDto
     {
         public Decimal TotalAmount { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
